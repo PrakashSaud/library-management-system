@@ -29,10 +29,13 @@ To do list
                             - expire_date
 
 -----------------------------------------------------------------
-2. Using generic class based views, list of all the books showing in template book_list.html
+2. Using generic class based views, list of all the books showing in template all_book_list.html
 
+3. using generic view add book, update book, delete book has completed
 
-3.
+4. using generic view list all students
+
+5. list all issued books
 
 
 ---------------------------------------------------------------------
