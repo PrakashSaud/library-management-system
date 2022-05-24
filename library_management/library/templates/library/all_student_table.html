@@ -1,0 +1,36 @@
+{% extends 'library/base.html' %}
+
+{% block title %} All students {% endblock %}
+
+{% block content %}
+
+<h2>All Students in our Library </h2>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>User</th>
+            <th>Registration</th>
+        </tr>
+    </thead>
+    {% for stud in object_list %}
+    <tbody>
+        <tr>
+            <td>{{ stud.name }}</td>
+            <td>{{ stud.user }}</td>
+            <td>
+                {% if stud.isRegistered %}
+                    True
+                {% else %}
+                    False
+                {% endif %}
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+{% endfor %}
+
+
+{% endblock %}

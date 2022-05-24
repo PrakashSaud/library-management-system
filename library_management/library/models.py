@@ -40,9 +40,16 @@ class Book(models.Model):
 
 
 class IssuedBook(models.Model):
-    name = models.ForeignKey(Book, on_delete=models.CASCADE)
-    issued_to = models.ForeignKey(Student, on_delete=models.CASCADE)
+    name = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="books")
+    issued_to = models.ForeignKey(Student, on_delete=models.CASCADE, related_name="students")
     issued_date = models.DateTimeField('issued_date', auto_now_add=True)
     expire_date = models.DateTimeField('expire_date', default=datetime.today() + timedelta(days=15))
 
-
+    def get_fine_amount(self):
+        """Once the book issued after 15 days the fine amount will be added
+        $5 everyday"""
+        days_of_fine = self.expire_date - self.issued_date
+        if days_of_fine > 0:
+            fine_amount = days_of_fine * 5
+            return fine_amount
+        return 0

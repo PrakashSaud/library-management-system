@@ -1,0 +1,15 @@
+{% extends 'library/base.html' %}
+
+{% block title %} Issued Books {% endblock %}
+
+{% block content %}
+<ol>
+{% for issued in object_set %}
+   <li>
+       <h3>{{ issued.books.title }} -- issued to -- {{ issued.students.name }}</h3>
+   </li>
+    {% endfor %}
+</ol>
+
+
+{% endblock %}

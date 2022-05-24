@@ -1,0 +1,92 @@
+- Student Panel
+- Admin Panel
+- Add Books
+- List Books
+- Issue Books
+- Auto Fine Charge
+- View Issued Books
+- View Available Students
+
+To do list
+1. models
+
+    model class                fields
+    -------------------------------------
+    - Student               - id(pk)
+                            - name
+                            - membership
+                            - user
+    ---------------------------------------
+    - Book                  - id(pk)
+                            - title
+                            - author
+                            - category
+                            - language
+                            - edition
+    ----------------------------------------
+    - IssuedBook            - issued_to
+                            - issued_date
+                            - expire_date
+
+-----------------------------------------------------------------
+2. Using generic class based views, list of all the books showing in template book_list.html
+
+
+3.
+
+
+---------------------------------------------------------------------
+General steps followed in django project
+----------------------------------------------------------------------
+
+1.  create virtual environment
+2.  activate it
+3.  install required packages
+
+4.  create project
+        django-admin startproject projectname
+
+5.  change directory where manage.py is located
+6.  create django app
+        python manage.py startapp appname
+
+7.  register the app in settings.py
+        appname.apps.AppnameConfig
+
+8.  write models.py
+9.  make migrations
+        python manage.py makemigrations
+
+10. apply the migrations
+        python manage.py migrate
+
+11. create superuser
+        python manage.py createsuperuser
+
+12. run server
+        python manage.py runserver
+
+13. To see in the web browser register in admin
+        admin.site.register([list_of_model_classes])
+
+14. create template directory and static directory inside app directory
+    - appname
+        - templates
+            - base.html
+            - index.html
+        - static
+            - css
+                - style.css
+            - images
+                - bg.jpg
+                - pp.png
+        - __init__.py
+        - admin.py
+        - apps.py
+        - models.py
+        - tests.py
+        - urls.py
+        - views.py
+
+
+15.

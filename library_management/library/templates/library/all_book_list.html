@@ -4,21 +4,21 @@
 
 {% block content %}
 <h2>All Books in our Library are </h2>
-<ul>
+<ol>
     {% for book in object_list %}
         {% if book.edition == 1 %}
             <li>
-                <a href="{% url 'book_detail' book.id %}">{{ book.title | upper }}: {{ book.edition }}st Edition - by {{ book.author | title }}</a>
+                <a href="{% url 'book_detail' book.id %}">{{ book.title | upper }}</a>: {{ book.edition }}st Edition --   {{ book.author | title }}
             </li>
         {% elif book.edition == 2 %}
-            <li><a href="{% url 'book_detail' book.id %}">{{ book.title | upper}}: {{ book.edition }}nd Edition - by {{ book.author | title }}</a> </li>
+            <li><a href="{% url 'book_detail' book.id %}">{{ book.title | upper}}</a>: {{ book.edition }}nd Edition --  {{ book.author | title }} </li>
         {% elif book.edition == 3 %}
-            <li><a href="{% url 'book_detail' book.id %}">{{ book.title |upper }}: {{ book.edition }}rd Edition - by {{ book.author | title }}</a></li>
+            <li><a href="{% url 'book_detail' book.id %}">{{ book.title |upper }}</a>: {{ book.edition }}rd Edition --  {{ book.author | title }}</li>
         {% else %}
-            <li><a href="{% url 'book_detail' book.id %}">{{ book.title | upper }}: {{ book.edition }}th Edition - by {{ book.author | title }}</a></li>
+            <li><a href="{% url 'book_detail' book.id %}">{{ book.title | upper }}</a>: {{ book.edition }}th Edition --  {{ book.author | title }}</li>
         {% endif %}
 
     {% endfor %}
-</ul>
+</ol>
 
 {% endblock %}
