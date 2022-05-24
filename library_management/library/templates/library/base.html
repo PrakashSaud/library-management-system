@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+<a href="{% url 'all_book_list' %}">All Books</a>
+<a href="{% url 'book_add' %}">Add Book</a>
+{% block content %}
+
+
+{% endblock %}
+</body>
+</html>

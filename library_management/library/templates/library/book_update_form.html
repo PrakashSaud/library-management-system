@@ -1,0 +1,16 @@
+{% extends 'library/base.html' %}
+
+{% block title %} Update Book {% endblock %}
+
+
+{% block content %}
+<form action="{% url 'book_update' object.id %}" method="POST">
+    {% csrf_token %}
+    <fieldset>
+        <legend><h1>Update book details</h1></legend>
+        {{ form }}
+    </fieldset>
+    <input type="submit" value="Update Book">
+</form>
+
+{% endblock %}

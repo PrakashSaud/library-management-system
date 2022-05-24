@@ -1,0 +1,24 @@
+{% extends 'library/base.html' %}
+
+{% block title %} All Books {% endblock %}
+
+{% block content %}
+<h2>All Books in our Library are </h2>
+<ul>
+    {% for book in object_list %}
+        {% if book.edition == 1 %}
+            <li>
+                <a href="{% url 'book_detail' book.id %}">{{ book.title | upper }}: {{ book.edition }}st Edition - by {{ book.author | title }}</a>
+            </li>
+        {% elif book.edition == 2 %}
+            <li><a href="{% url 'book_detail' book.id %}">{{ book.title | upper}}: {{ book.edition }}nd Edition - by {{ book.author | title }}</a> </li>
+        {% elif book.edition == 3 %}
+            <li><a href="{% url 'book_detail' book.id %}">{{ book.title |upper }}: {{ book.edition }}rd Edition - by {{ book.author | title }}</a></li>
+        {% else %}
+            <li><a href="{% url 'book_detail' book.id %}">{{ book.title | upper }}: {{ book.edition }}th Edition - by {{ book.author | title }}</a></li>
+        {% endif %}
+
+    {% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'library/base.html' %}
+
+{% block title %} Delete Book {% endblock %}
+
+{% block content %}
+
+<form action="{% url 'book_delete' object.id %}" method="POST">
+    {% csrf_token %}
+    <fieldset>
+        <legend><h1>Delete Book From the Library List</h1></legend>
+        <p>Are you sure you want to delete "{{ object }}" from the list ?</p>
+    </fieldset>
+    <input type="submit" value="Confirm Delete">
+</form>
+
+
+{% endblock %}

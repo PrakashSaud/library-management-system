@@ -1,0 +1,16 @@
+{% extends 'library/base.html' %}
+
+{% block title %} Add Book {% endblock %}
+
+{% block content %}
+<form action="{% url 'book_add' %}" method="POST">
+    {% csrf_token %}
+    <fieldset>
+        <legend><h1>Add Book to the Library</h1></legend>
+        {{ form.as_p }}
+    </fieldset>
+    <input type="submit" value="Add Book">
+</form>
+
+
+{% endblock %}

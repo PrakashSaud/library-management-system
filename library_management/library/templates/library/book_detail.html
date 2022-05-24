@@ -1,0 +1,13 @@
+{% extends 'library/base.html' %}
+
+
+{% block title %} {{ object.title | truncatechars:10 }} {% endblock %}
+
+{% block content %}
+<h1>{{ object.title }}</h1>
+<p> This book belongs to {{ object.category }} category. This is {{ object.edition }}th edition written by
+    {{ object.author }}. This is available in {{ object.language }} language.
+</p>
+<a href="{% url 'book_update' object.id %}">Update Details</a>
+<a href="{% url 'book_delete' object.id %}">Delete Book</a>
+{% endblock %}
