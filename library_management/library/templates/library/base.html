@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
+    <style>
+    th, td{
+    border: 1px solid black;
+    }
+</style>
 </head>
 <body>
 <div>
@@ -14,6 +19,7 @@
 <div>
     <a href="{% url 'all_student_list' %}"> All students  </a>
 </div>
+<div><a href="{% url 'student_add' %}">Add Student</a></div>
 <div><a href="{% url 'logout' %}">Logout</a></div>
 {% block content %}
 

@@ -1,0 +1,18 @@
+{% extends 'library/base.html' %}
+
+{% block title %} Add Student {% endblock %}
+
+{% block content %}
+
+<form action="{% url 'student_add' %}" method="POST">
+{% csrf_token %}
+    <fieldset>
+        <legend><h1>Add student with the following credentials</h1></legend>
+    {{ student_form.as_p }}
+    </fieldset>
+
+    <input type="submit" value="Add Student">
+</form>
+
+
+{% endblock %}

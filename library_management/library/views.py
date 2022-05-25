@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.views import generic
-from .forms import NewUserForm
+from .forms import NewUserForm, StudentForm, BookForm
 from .models import Book, Student, IssuedBook
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.forms import AuthenticationForm
@@ -32,10 +32,25 @@ class BookAddView(generic.CreateView):
 class BookUpdateView(generic.UpdateView):
     model = Book
     fields = ['title', 'author', 'category', 'language', 'edition']
-    # template_name = 'library/book_update_form.html'
+    template_name = 'library/book_update_form.html'
 
     def get_success_url(self):
-        return reverse('book_detail')
+        return reverse('all_book_list')
+
+    # def get_success_url(self, **kwargs):
+    #     return reverse('book_detail', kwargs={'id': self.object.pk})
+
+
+# Using function Based view
+# def book_update(request, book_id):
+#     if request.method == "POST":
+#         book_obj = Book.objects.get(pk=book_id)
+#         form = BookForm(request.POST, instance=book_obj)
+#         if form.is_valid():
+#             form.save()
+#         else:
+#             form = BookForm()
+#         return render(request, 'library/book_update_form.html', {'form': form})
 
 
 class BookDeleteView(generic.DeleteView):
@@ -51,6 +66,25 @@ class IssuedBookListView(generic.ListView):
 
 
 # STUDENT RELATED VIEWS
+def add_new_student(request):
+    form = StudentForm(request.POST)
+    if form.is_valid():
+        name = form.cleaned_data['name']
+        email = form.cleaned_data['email']
+        phone = form.cleaned_data['phone']
+        user = form.cleaned_data['user']
+        registration = form.cleaned_data['isRegistered']
+        add_stud = Student(name=name,
+                           email=email,
+                           phone=phone,
+                           user=user,
+                           isRegistered=registration)
+        add_stud.save()
+        # return HttpResponseRedirect(reverse('all_student_list'))
+    else:
+        form = StudentForm()
+    return render(request, 'library/student_add_form.html', {'student_form': form})
+
 
 class AllStudentListView(generic.ListView):
     model = Student
@@ -88,7 +122,7 @@ def login_request(request):
             if user is not None:
                 login(request, user)
                 message = "You're now logged In"
-                return HttpResponseRedirect(reverse('all_book_list'))
+                return HttpResponseRedirect(reverse('all_student_list'))
             else:
                 message = "Invalid Username or Password"
         else:

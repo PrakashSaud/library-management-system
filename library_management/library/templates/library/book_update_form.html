@@ -8,7 +8,7 @@
     {% csrf_token %}
     <fieldset>
         <legend><h1>Update book details</h1></legend>
-        {{ form }}
+        {{ form.as_p }}
     </fieldset>
     <input type="submit" value="Update Book">
 </form>

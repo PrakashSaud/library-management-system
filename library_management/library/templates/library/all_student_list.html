@@ -5,10 +5,25 @@
 {% block content %}
 
 <h2>All Students in our Library </h2>
-<ol>
-    {% for student in object_list %}
-    <li><a href="{% url 'student_detail' student.id %}">{{ student.name | title }} </a> -- {{ student.user | upper }} -- {{ student.isRegistered }}</li>
+<table>
+        <tr>
+            <th>SN/ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>User</th>
+            <th>Registration</th>
+        </tr>
+    {% for stud in object_list %}
+        <tr>
+            <td>{{ stud.id }}</td>
+            <td>{{ stud.name }}</td>
+            <td>{{ stud.email }}</td>
+            <td>{{ stud.phone }}</td>
+            <td>{{ stud.user }}</td>
+            <td>{{ stud.isRegistered }}</td>
+        </tr>
     {% endfor %}
-</ol>
+</table>
 
 {% endblock %}
