@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from django.views import generic
 from .forms import NewUserForm, StudentForm, BookForm
@@ -63,6 +63,12 @@ class BookDeleteView(generic.DeleteView):
 class IssuedBookListView(generic.ListView):
     model = IssuedBook
     template_name = 'library/issued_book_list.html'
+
+
+def book_issue(request, book_id):
+    book = get_object_or_404(IssuedBook, pk=book_id)
+    book.issue()
+    return redirect('book_detail', pk=book_id)
 
 
 # STUDENT RELATED VIEWS

@@ -3,13 +3,15 @@
 {% block title %} Issued Books {% endblock %}
 
 {% block content %}
+{% if object_set %}
 <ol>
 {% for issued in object_set %}
    <li>
-       <h3>{{ issued.books.title }} -- issued to -- {{ issued.students.name }}</h3>
+       <h3>{{ issued.name.title }} -- issued to -- {{ issued.issued_to.name }}</h3>
    </li>
     {% endfor %}
 </ol>
-
-
+{% else %}
+<h3>No books are issued</h3>
+{% endif %}
 {% endblock %}

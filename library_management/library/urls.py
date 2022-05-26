@@ -14,7 +14,7 @@ urlpatterns = [
     path('book/<int:pk>/delete', views.BookDeleteView.as_view(), name="book_delete"),
 
     path('books/issued', views.IssuedBookListView.as_view(), name="issued_book_list"),
-
+    path('issue/<int:pk>/', views.book_issue, name="issue_book"),
 
     path('students/', views.AllStudentListView.as_view(), name="all_student_list"),
     path('student/<int:pk>', views.StudentDetailView.as_view(), name="student_detail"),
