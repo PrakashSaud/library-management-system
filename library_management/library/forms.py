@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Book, Student
+from .models import Book, Student, IssuedBook
 
 
 class NewUserForm(UserCreationForm):
@@ -42,3 +42,14 @@ class StudentForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={
                 'placeholder': 'Enter your name here'})}
+
+
+class IssueBookForm(forms.ModelForm):
+    class Meta:
+        model = IssuedBook
+        fields = ['name', 'issued_to', 'issued_date']
+        labels = {
+            'name': 'Select Book',
+            'issued_to': 'Select Student',
+            'issued_date': 'Date of Issue'
+        }

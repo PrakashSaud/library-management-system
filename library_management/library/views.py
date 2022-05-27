@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from django.views import generic
-from .forms import NewUserForm, StudentForm, BookForm
+from .forms import NewUserForm, StudentForm, BookForm, IssueBookForm
 from .models import Book, Student, IssuedBook
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
+from django.utils import timezone
 
 
 # Create your views here.
@@ -60,15 +61,25 @@ class BookDeleteView(generic.DeleteView):
     success_url = reverse_lazy('all_book_list')
 
 
-class IssuedBookListView(generic.ListView):
-    model = IssuedBook
-    template_name = 'library/issued_book_list.html'
+def issued_book_list(request):
+    books = IssuedBook.objects.all()
+    return render(request, 'library/issued_book_list.html', {'issued_books': books})
 
 
-def book_issue(request, book_id):
-    book = get_object_or_404(IssuedBook, pk=book_id)
-    book.issue()
-    return redirect('book_detail', pk=book_id)
+# this method issue the book for a student
+def book_issue(request):
+    if request.method == 'POST':
+        form = IssueBookForm(request.POST)
+        if form.is_valid():
+            book = form.cleaned_data['name']
+            student = form.cleaned_data['issued_to']
+            issued_time = form.cleaned_data['issued_date']
+            issued_book_obj = IssuedBook(name=book, issued_to=student, issued_date=issued_time)
+            issued_book_obj.save()
+            form = IssueBookForm()
+    else:
+        form = IssueBookForm()
+    return render(request, 'library/issue_book_form.html', {'issue_form':form})
 
 
 # STUDENT RELATED VIEWS
@@ -80,13 +91,12 @@ def add_new_student(request):
         phone = form.cleaned_data['phone']
         user = form.cleaned_data['user']
         registration = form.cleaned_data['isRegistered']
-        add_stud = Student(name=name,
+        Student.objects.create(name=name,
                            email=email,
                            phone=phone,
                            user=user,
                            isRegistered=registration)
-        add_stud.save()
-        # return HttpResponseRedirect(reverse('all_student_list'))
+        return HttpResponseRedirect(reverse('all_student_list'))
     else:
         form = StudentForm()
     return render(request, 'library/student_add_form.html', {'student_form': form})
@@ -100,6 +110,18 @@ class AllStudentListView(generic.ListView):
 class StudentDetailView(generic.DetailView):
     model = Student
     template_name = 'library/student_detail.html'
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data()
+    #     context['due_amount'] = Student.due_amount(self)
+    #     return context
+
+
+# if student want to register to issue books
+def register_student(request, **kwargs):
+    student = get_object_or_404(Student, pk=kwargs['pk'])
+    student.register()
+    return redirect('student_detail', pk=kwargs['pk'])
 
 
 # Authentication

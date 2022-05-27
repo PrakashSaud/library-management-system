@@ -3,11 +3,13 @@
 {% block title %} Issued Books {% endblock %}
 
 {% block content %}
-{% if object_set %}
+
+{% if issued_books %}
+<h1>All issued Books are</h1>
 <ol>
-{% for issued in object_set %}
+{% for issued in issued_books %}
    <li>
-       <h3>{{ issued.name.title }} -- issued to -- {{ issued.issued_to.name }}</h3>
+       <h5>{{ issued.name.title | upper }} -- issued to -- <a href="{% url 'student_detail' issued.issued_to.id %}">{{ issued.issued_to.name | title }}</a></h5>
    </li>
     {% endfor %}
 </ol>

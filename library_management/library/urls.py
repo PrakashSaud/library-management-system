@@ -13,12 +13,13 @@ urlpatterns = [
     path('book/create', views.BookAddView.as_view(), name="book_add"),
     path('book/<int:pk>/delete', views.BookDeleteView.as_view(), name="book_delete"),
 
-    path('books/issued', views.IssuedBookListView.as_view(), name="issued_book_list"),
-    path('issue/<int:pk>/', views.book_issue, name="issue_book"),
+    path('books/issued', views.issued_book_list, name="issued_book_list"),
+    path('book/issue', views.book_issue, name="issue_book"),
 
     path('students/', views.AllStudentListView.as_view(), name="all_student_list"),
     path('student/<int:pk>', views.StudentDetailView.as_view(), name="student_detail"),
     path('student/add', views.add_new_student, name="student_add"),
+    path('student/<int:pk>/register', views.register_student, name="register_student"),
 
 
 

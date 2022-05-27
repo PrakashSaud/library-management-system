@@ -6,6 +6,44 @@
 
 <h1>{{ object.name }}</h1>
 
-<p>Registration is -- {{ object.isRegistered }}</p>
+{% if object.isRegistered %}
+    <h4>Registered Student</h4>
+{% else %}
+    <h4>Not Registered</h4>
+    <a href="{% url 'register_student' object.id %}">Register Now</a>
+{% endif %}
+
+
+<div>
+    <h3>Contact:</h3>
+    <ul>
+        <li><h4>Email:  {{ object.email }}</h4></li>
+        <li><h4>Phone:  {{ object.phone }}</h4></li>
+    </ul>
+</div>
+<div>
+    <h4> User:  {{ object.user }}</h4>
+</div>
+
+
+<div>
+    <h3>Books Issued to this student:</h3>
+    {% if object.isRegistered %}
+    <ol>
+        {% for book in object_set %}
+        <li><a href="{% url 'book_detail' id=book_id %}">{{ book.name.title }}</a></li>
+        {% empty %}
+        <li>No Book is Issued</li>
+        {% endfor %}
+    </ol>
+    {% else %}
+        <h3>No Book is Issued</h3>
+    {% endif %}
+</div>
+<div>
+    <h3>Total Due amount is {{ due_amount }}</h3>
+</div>
+
+
 
 {% endblock %}

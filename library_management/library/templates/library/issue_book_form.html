@@ -1,0 +1,17 @@
+{% extends 'library/base.html' %}
+
+{% block title %} Issue Book {% endblock %}
+
+{% block content %}
+
+<h1>Issue book Now</h1>
+<form action="{% url 'issue_book' %}" method="post">
+  {% csrf_token %}
+  <fieldset>
+    <legend><h2>Issue book </h2></legend>
+    {{ issue_form.as_p }}
+    <input type="submit" value="Issue">
+  </fieldset>
+</form>
+
+{% endblock %}

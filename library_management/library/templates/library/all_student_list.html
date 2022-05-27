@@ -16,7 +16,7 @@
         </tr>
     {% for stud in object_list %}
         <tr>
-            <td>{{ stud.id }}</td>
+            <td><a href="{% url 'student_detail' stud.id %}">{{ stud.id }}</a></td>
             <td>{{ stud.name }}</td>
             <td>{{ stud.email }}</td>
             <td>{{ stud.phone }}</td>
